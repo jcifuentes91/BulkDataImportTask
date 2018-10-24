@@ -1,4 +1,5 @@
 # BulkDataImportTask
+## INSTRUCTIONS:
 CSV report:
 - the first line contains headers always
 - you should ensure that all required fields are present
@@ -22,3 +23,5 @@ Your class:
 - should be able to import a given file (if all required headers are present)  
 - suggest a db structure and write SQL commands to create it 
 - be able to process big files with low enough memory usage.
+
+##QUERIES:
