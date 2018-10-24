@@ -67,7 +67,10 @@ $db_pass = 'VIQTGgXTlN8';
 $database = 'test';
 //Run migration
 BulkImport::migrate($db_host,$db_user,$db_pass,$database);
+//Create wrapper
 $db = new Database($db_host,$db_user,$db_pass,$database);
+//Instantiate a BulkImport object
 $import = new BulkImport($db,$mapping);
+//Proces the file
 $import->processFile('report.csv');
 
