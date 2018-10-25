@@ -163,7 +163,7 @@ Class BulkImport{
         $this->database->run($transaction_sql);
         //Drop the tmp data table
         $sql1 = 'DROP TABLE IF EXISTS `tmp_data_import`;';
-        //$this->database->run($sql1);
+        $this->database->run($sql1);
         print_r("Process finished \n");
     }
     
