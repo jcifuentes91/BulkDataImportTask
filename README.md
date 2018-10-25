@@ -25,3 +25,19 @@ Your class:
 - be able to process big files with low enough memory usage.
 
 ## QUERIES:
+- display all transactions for a batch (merchant + date + ref num) date, type, card_type, card_number, amount 
+```
+SELECT merchant_id, 
+	merchant_name, 
+    batch_date, 
+    ref_num as 'batch_ref_num',
+    date as 'transaction_date', 
+    transaction_type,
+    card_type,
+    card_number,
+    amount FROM test.transaction_merge
+WHERE ref_num = '307965163216534420635657' 
+AND batch_date = '2018-05-05'
+AND merchant_id = '344858307505959269';
+```
+

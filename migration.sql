@@ -6,11 +6,11 @@ DROP TABLE IF EXISTS `transaction_type`;
 
 CREATE TABLE `batch` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `ref_num` int(11) NOT NULL,
+  `ref_num` VARCHAR(24) NOT NULL,
   `date` date NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `ref_num_date_UNIQUE` (`ref_num`,`date`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE `card_type` (
@@ -18,7 +18,7 @@ CREATE TABLE `card_type` (
   `name` varchar(2) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE `merchant` (
@@ -26,7 +26,7 @@ CREATE TABLE `merchant` (
   `merchant_id` varchar(18) NOT NULL,
   `merchant_name` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=128 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE `transaction_type` (
@@ -34,7 +34,7 @@ CREATE TABLE `transaction_type` (
   `name` varchar(20) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE `transaction` (
@@ -55,7 +55,7 @@ CREATE TABLE `transaction` (
   CONSTRAINT `transaction_card_type` FOREIGN KEY (`card_type`) REFERENCES `card_type` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `transaction_merchant` FOREIGN KEY (`merchant_id`) REFERENCES `merchant` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `transaction_type` FOREIGN KEY (`type`) REFERENCES `transaction_type` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2048 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `transaction_merge`;
 CREATE VIEW `transaction_merge` 

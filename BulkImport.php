@@ -56,9 +56,9 @@ Class BulkImport{
         }
         //Executes all the commands on the migration sql file
         if ($mysqli->multi_query($sql)) {
-            echo "Migration success";
+            echo "Migration success \n";
         } else {
-            echo "Migration error";
+            echo "Migration error \n";
         }
     }
 
@@ -70,10 +70,10 @@ Class BulkImport{
         $sql1 = 'DROP TABLE IF EXISTS `tmp_data_import`;';
         //DDL to create the tmp_data_import table
         $sql2 = 'CREATE TABLE `tmp_data_import` (
-          `mid` int(11) NOT NULL,
+          `mid` VARCHAR(18) NOT NULL,
           `dba` varchar(100) NOT NULL,
           `batch_date` date NOT NULL,
-          `batch_ref_num` int(11) NOT NULL,
+          `batch_ref_num` VARCHAR(24) NOT NULL,
           `trans_date` date NOT NULL,
           `trans_type` varchar(20) NOT NULL,
           `trans_card_type` varchar(2) NOT NULL,
@@ -104,6 +104,7 @@ Class BulkImport{
     different entities in the database 
     */
     public function processFile($file_location){
+        print_r("Processing file\n");
         //Generates temporary table
         $this->generateTmpTable();
         //Reads the csv file
@@ -113,7 +114,7 @@ Class BulkImport{
         //Sorts the headers and mappings
         $this->sortHeaders($headers);
         //Sql command to insert data into the temporary table
-        $sql = "INSERT INTO tmp_data_import (`mid`,`dba`,`batch_date`,`batch_ref_num`,`trans_date`, `trans_type`,`trans_card_type`,`trans_card_num`,`trans_amount`) VALUES (?,?,?,?,?,?,?,?,?)";
+        $sql = "INSERT INTO tmp_data_import (`mid`,`dba`,`batch_date`,`batch_ref_num`,`trans_date`, `trans_type`,`trans_card_type`,`trans_card_num`,`trans_amount`) VALUES (:mid,:dba,:bd,:brn,:td,:tt,:tct,:tcn,:ta)";
         $line_no = 1;
         //While the file can be read and separated using fgetcsv, stores it in an array
         while (($line = fgetcsv($file)) !== FALSE) {
@@ -130,10 +131,11 @@ Class BulkImport{
                 $trans_card_type = $line[$this->sorted['trans_card_type']];
                 $trans_card_num = $line[$this->sorted['trans_card_num']];
                 $trans_amount = $line[$this->sorted['trans_amount']];
+                $params = ['mid'=>$mid,'dba'=>$dba,'bd'=>$batch_date,'brn' => $batch_ref_num, 'td' => $trans_date,'tt'=>$trans_type,'tct'=>$trans_card_type,'tcn'=>$trans_card_num,'ta'=>$trans_amount];
                 //execute the insert sql with the parameters
-                $this->database->run($sql,[$mid,$dba,$batch_date,$batch_ref_num,$trans_date,$trans_type,$trans_card_type,$trans_card_num,$trans_amount]);
+                $this->database->run($sql,$params);
             }else{
-                print_r('Columns missing in line: '.$line_no);
+                print_r('Columns missing in line: '.$line_no."\n");
             }
         }
         //Close the file
@@ -161,7 +163,8 @@ Class BulkImport{
         $this->database->run($transaction_sql);
         //Drop the tmp data table
         $sql1 = 'DROP TABLE IF EXISTS `tmp_data_import`;';
-        $this->database->run($sql1);
+        //$this->database->run($sql1);
+        print_r("Process finished \n");
     }
     
 
