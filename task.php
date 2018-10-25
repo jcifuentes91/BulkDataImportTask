@@ -1,4 +1,9 @@
 <?php
+$db_host = 'localhost'; //Mysql Host
+$db_user = 'test_user'; //Mysql User
+$db_pass = 'VIQTGgXTlN8'; //Mysql password
+$database = 'test'; //Mysql database/schema
+
 include 'BulkImport.php';
 
 class ReportFields
@@ -61,10 +66,6 @@ $mapping = [
  * - display top 10 merchants (by total amount) for a given date range
  *      merchant id, merchant name, total amount, number of transactions
  */
-$db_host = 'localhost';
-$db_user = 'test_user';
-$db_pass = 'VIQTGgXTlN8';
-$database = 'test';
 //Run migration
 BulkImport::migrate($db_host,$db_user,$db_pass,$database);
 //Create wrapper

@@ -24,6 +24,19 @@ Your class:
 - suggest a db structure and write SQL commands to create it 
 - be able to process big files with low enough memory usage.
 
+## HOW TO RUN THE TEST
+- change the first 6 lines on task.php
+```
+$db_host = 'localhost'; //Mysql Host
+$db_user = 'test_user'; //Mysql User
+$db_pass = 'VIQTGgXTlN8'; //Mysql password
+$database = 'test'; //Mysql database/schema
+```
+- run
+``` 
+php task.php
+```
+
 ## QUERIES:
 - display all transactions for a batch (merchant + date + ref num) date, type, card_type, card_number, amount 
 ```
