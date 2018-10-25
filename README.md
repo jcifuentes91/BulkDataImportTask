@@ -25,7 +25,7 @@ Your class:
 - be able to process big files with low enough memory usage.
 
 ## HOW TO RUN THE TEST
-- change the first 6 lines on task.php
+- change the first 5 lines on task.php to your mysql connection parameters
 ```
 $db_host = 'localhost'; //Mysql Host
 $db_user = 'test_user'; //Mysql User
